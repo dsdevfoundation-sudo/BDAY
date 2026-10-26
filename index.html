@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff3f8">
+  <title>HAPPY BIRTHDAYYY, SAYANGGG!! 🎂💗</title>
+
+  <!--
+    BIRTHDAY WEBSITE — EDIT SEMUA LANGSUNG DI VS CODE
+    1. Ganti nama, teks, URL foto, dan URL lagu di bagian CONFIG di bawah.
+    2. Bisa pakai path lokal seperti "assets/images/foto1.jpg"
+       atau direct URL publik dari hosting foto/audio.
+    3. Kalau pakai URL hosting, pastikan URL mengarah langsung ke file media.
+  -->
+
+  <style>
+    /* =========================
+       1. WARNA & PENGATURAN DASAR
+       ========================= */
+    :root {
+      --pink: #ff8fb7;
+      --pink-light: #ffe0ec;
+      --purple: #c5b5ff;
+      --cream: #fff9f2;
+      --text: #503d50;
+      --muted: #927c91;
+      --white: #ffffff;
+      --glass: rgba(255, 255, 255, 0.72);
+      --shadow: 0 18px 50px rgba(132, 83, 125, 0.14);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, #ffe3ed 0, transparent 32%),
+        radial-gradient(circle at 90% 30%, #e8e0ff 0, transparent 30%),
+        linear-gradient(135deg, #fff8f6, #fff4e9 55%, #f8f2ff);
+    }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    button:focus-visible, a:focus-visible {
+      outline: 3px solid #a58af6;
+      outline-offset: 4px;
+    }
+
+    /* Background image dari CONFIG */
+    .background-image {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.20; /* Ubah opacity background di sini */
+      pointer-events: none;
+    }
+    .background-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: linear-gradient(135deg, rgba(255,248,246,.80), rgba(255,244,233,.78), rgba(248,242,255,.80));
+      pointer-events: none;
+    }
+
+    /* Ornamen yang melayang */
+    #floating-decorations {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .floating-item {
+      position: absolute;
+      bottom: -60px;
+      opacity: .52;
+      animation: floatUp linear infinite;
+      filter: drop-shadow(0 5px 8px rgba(255, 143, 183, .2));
+      user-select: none;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: .55; }
+      90% { opacity: .45; }
+      100% { transform: translateY(-115vh) rotate(320deg); opacity: 0; }
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-11px) rotate(2deg); }
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: .5; transform: scale(.9); }
+      50% { opacity: 1; transform: scale(1.15); }
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .container { width: min(1100px, 91%); margin: 0 auto; }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      padding: 23px 0;
+    }
+    .brand {
+      font-weight: 900;
+      font-size: 1.08rem;
+      letter-spacing: -.04em;
+    }
+    .brand span { color: #ef6d9c; }
+    .top-link {
+      border: 1px solid rgba(255,255,255,.95);
+      background: rgba(255,255,255,.6);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 15px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform .2s;
+    }
+    .top-link:hover { transform: translateY(-2px); }
+
+    /* =========================
+       2. HERO / UCAPAN UTAMA
+       ========================= */
+    .hero {
+      text-align: center;
+      padding: 38px 0 65px;
+      position: relative;
+    }
+    .cake {
+      display: inline-block;
+      font-size: clamp(4rem, 10vw, 6.3rem);
+      animation: bob 3s ease-in-out infinite;
+      filter: drop-shadow(0 12px 12px rgba(206, 118, 157, .2));
+    }
+    .eyebrow {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 9px 15px;
+      border: 1px solid white;
+      background: rgba(255,255,255,.65);
+      border-radius: 999px;
+      color: #c56b91;
+      font-weight: 900;
+      font-size: .82rem;
+      letter-spacing: .04em;
+    }
+    h1 {
+      margin: 22px auto 17px;
+      max-width: 900px;
+      font-size: clamp(2.8rem, 8.8vw, 6.2rem);
+      line-height: .98;
+      letter-spacing: -.075em;
+    }
+    .gradient-text {
+      color: #ef79a4;
+      background: linear-gradient(90deg, #f174a2, #ad94ff, #f3a766);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-description {
+      max-width: 610px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.5vw, 1.16rem);
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+    .button-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 27px;
+    }
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 19px;
+      font-weight: 900;
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      cursor: pointer;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary {
+      background: var(--pink);
+      color: white;
+      box-shadow: 0 6px 0 #e7789f;
+    }
+    .button-primary:active {
+      transform: translateY(3px);
+      box-shadow: 0 3px 0 #e7789f;
+    }
+    .button-secondary {
+      background: white;
+      color: #c85f8d;
+      box-shadow: 0 5px 0 #f3dce7;
+    }
+
+    .sparkle-row {
+      margin-top: 12px;
+      color: #e9a1bc;
+      letter-spacing: .65rem;
+      animation: twinkle 2.5s ease-in-out infinite;
+    }
+
+    /* =========================
+       3. SECTION & KARTU
+       ========================= */
+    .section { padding: 32px 0 48px; }
+    .section-heading { text-align: center; margin-bottom: 25px; }
+    .section-kicker {
+      color: #d46f98;
+      text-transform: uppercase;
+      font-weight: 900;
+      font-size: .78rem;
+      letter-spacing: .17em;
+    }
+    h2 {
+      margin: 8px 0 10px;
+      font-size: clamp(1.9rem, 5vw, 2.8rem);
+      line-height: 1.1;
+      letter-spacing: -.055em;
+    }
+    .section-heading p {
+      max-width: 600px;
+      margin: 0 auto;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .glass-card {
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,.95);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+    }
+
+    /* =========================
+       4. GALERI MEMORY
+       ========================= */
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 19px;
+    }
+    .memory-card {
+      min-width: 0;
+      padding: 10px 10px 15px;
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: 20px;
+      background: white;
+      box-shadow: 0 10px 28px rgba(116, 73, 113, .10);
+      transform: rotate(var(--tilt, 0deg));
+      transition: transform .25s;
+    }
+    .memory-card:hover { transform: translateY(-6px) rotate(0deg); }
+    .memory-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 4.3;
+      object-fit: cover;
+      border-radius: 13px;
+      background: #ffe3ed;
+    }
+    .memory-caption {
+      margin: 12px 5px 0;
+      text-align: center;
+      font-weight: 900;
+      overflow-wrap: anywhere;
+    }
+    .memory-date {
+      margin: 5px 5px 0;
+      text-align: center;
+      color: #a58da3;
+      font-size: .82rem;
+    }
+
+    /* =========================
+       5. KARTU PESAN
+       ========================= */
+    .letter-card {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: clamp(25px, 6vw, 55px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .letter-card::before, .letter-card::after {
+      content: "✿";
+      position: absolute;
+      color: #f39abb;
+      opacity: .45;
+      font-size: 3rem;
+    }
+    .letter-card::before { top: 8px; left: 15px; }
+    .letter-card::after { right: 15px; bottom: 8px; }
+    .letter-icons { font-size: 2rem; }
+    .letter-text {
+      max-width: 620px;
+      margin: 19px auto;
+      font-size: clamp(1.15rem, 3.5vw, 1.6rem);
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+    .letter-signature { color: #cf6c96; font-weight: 900; }
+
+    /* =========================
+       6. MUSIC PLAYER
+       ========================= */
+    .music-card {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 22px;
+      display: flex;
+      align-items: center;
+      gap: 19px;
+    }
+    .music-disc {
+      display: grid;
+      place-items: center;
+      width: 86px;
+      height: 86px;
+      flex: 0 0 86px;
+      border-radius: 50%;
+      background: conic-gradient(#ff9fbd, #c5b5ff, #ffe1a1, #ff9fbd);
+      box-shadow: 0 8px 20px rgba(185,129,173,.25);
+      font-size: 2rem;
+    }
+    .music-disc.is-playing { animation: spin 5s linear infinite; }
+    .music-details { flex: 1; min-width: 0; }
+    .music-details h3 { margin: 0 0 6px; }
+    .music-details p { margin: 0; color: var(--muted); font-size: .92rem; overflow-wrap: anywhere; }
+    .music-buttons { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 14px; }
+    .music-buttons .button { padding: 10px 15px; }
+
+    /* =========================
+       7. CONFETTI
+       ========================= */
+    #confetti-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .confetti-piece {
+      position: absolute;
+      top: -20px;
+      width: 9px;
+      height: 13px;
+      animation: confettiFall 3s ease-in forwards;
+    }
+    @keyframes confettiFall {
+      to { transform: translate3d(var(--drift), 110vh, 0) rotate(850deg); opacity: .9; }
+    }
+
+    footer {
+      padding: 25px 0 40px;
+      color: var(--muted);
+      text-align: center;
+      font-size: .9rem;
+      line-height: 1.8;
+    }
+    footer strong { color: #d16c96; }
+
+    /* =========================
+       8. RESPONSIVE MOBILE
+       ========================= */
+    @media (max-width: 720px) {
+      .hero { padding: 28px 0 45px; }
+      .memory-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+      .music-card { align-items: flex-start; flex-wrap: wrap; }
+      .music-details { min-width: calc(100% - 110px); }
+      .music-buttons { width: 100%; }
+      .music-buttons .button { flex: 1; }
+    }
+    @media (max-width: 420px) {
+      .container { width: 92%; }
+      .topbar { padding: 17px 0; }
+      .brand { font-size: .95rem; }
+      .top-link { padding: 9px 11px; font-size: .85rem; }
+      .hero { padding-top: 22px; }
+      .memory-grid { gap: 10px; }
+      .memory-card { padding: 7px 7px 12px; }
+      .memory-card img { aspect-ratio: 1 / 1.1; }
+      .music-card { padding: 17px; gap: 13px; }
+      .music-disc { width: 66px; height: 66px; flex-basis: 66px; }
+      .music-details { min-width: calc(100% - 80px); }
+      .button { padding: 12px 15px; font-size: .9rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Background halaman: ganti URL di CONFIG JS bagian bawah -->
+  <div class="background-image" id="backgroundImage"></div>
+  <div class="background-overlay"></div>
+  <div id="floating-decorations" aria-hidden="true"></div>
+  <div id="confetti-layer" aria-hidden="true"></div>
+
+  <div class="container">
+    <nav class="topbar">
+      <div class="brand">hari<span>♡</span>bahagiamuuu</div>
+      <a class="top-link" href="#memories">memoriii si kecikkk ↓</a>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="cake" aria-hidden="true">🎂</div><br>
+      <div class="eyebrow">✦ HARI INII FULL PUNYA KAMUUU!! ✦</div>
+      <h1>HAPPY BIRTHDAYYY,<br><span class="gradient-text" id="birthdayName">SAYANGGG!</span></h1>
+      <p class="hero-description" id="heroDescription"></p>
+      <div class="button-row">
+        <button class="button button-primary" id="surpriseButton">PENCET INIII!! 🎉💗</button>
+        <a class="button button-secondary" href="#letter">ada surat buat kamuuu 💌</a>
+      </div>
+      <div class="sparkle-row" aria-hidden="true">✧ ♡ ✧ ♡ ✧</div>
+    </header>
+
+    <!-- MEMORY GALLERY -->
+    <section class="section" id="memories">
+      <div class="section-heading">
+        <div class="section-kicker">foto-foto kecil, tapi gemesss bangettt</div>
+        <h2>FOTO SI PENDEQ NIIII 📸💗</h2>
+        <p>LIAT DEHHH, orang ini lucuu yaa wakakakaka 🥹💗</p>
+      </div>
+      <div class="memory-grid" id="memoryGrid"></div>
+    </section>
+
+    <!-- LOVE LETTER -->
+    <section class="section" id="letter">
+      <div class="section-heading">
+        <div class="section-kicker">peluk jauhh duluu sini 🫂💗</div>
+        <h2>BUAT KAMUUU YANG PALING AKU SAYANG 💌</h2>
+      </div>
+      <div class="glass-card letter-card">
+        <div class="letter-icons" aria-hidden="true">💗 🌷 💗</div>
+        <p class="letter-text" id="letterText"></p>
+        <div class="letter-signature" id="letterSignature"></div>
+      </div>
+    </section>
+
+    <!-- MUSIC -->
+    <section class="section" id="music">
+      <div class="section-heading">
+        <div class="section-kicker">puterr lagunyaa sambil inget akuuu hehe</div>
+        <h2>LAGU BUAT KAMUUU 🎧🎶</h2>
+        <p>Puterr yaa lagunyaa, anggep aja aku lagi nyanyi di sebelah kamuuu (walaupun suaraku mungkin bikin kamu kabur 😭) pokoknya lagu inii buat kamuuu!! ♡</p>
+      </div>
+      <div class="glass-card music-card">
+        <div class="music-disc" id="musicDisc" aria-hidden="true">🎵</div>
+        <div class="music-details">
+          <h3 id="songTitle">laguu spesial buat kamuuu ♡</h3>
+          <p id="songStatus">PENCET PUTAR DULUUU BUAT DENGERINN 🎶</p>
+          <div class="music-buttons">
+            <button class="button button-primary" id="playButton">▶ Puterrr</button>
+            <button class="button button-secondary" id="stopButton">■ Stop duluu</button>
+          </div>
+        </div>
+      </div>
+      <!-- Lagu dikonfigurasi lewat JS. Browser biasanya butuh interaksi user sebelum audio diputar. -->
+      <audio id="birthdayAudio" preload="none" loop></audio>
+    </section>
+
+    <footer>
+      dibuatt khusus buat nana pendeq, pake banyak <strong>♡</strong> soalnya satu aja nggak cukup hehe ✨<br>
+      <span>POKOKNYA HARUS BAHAGIA TERUS YAAA, SAYANGGG!! 💗</span>
+    </footer>
+  </div>
+
+  <script>
+    /* =========================================================
+       CONFIG — EDIT BAGIAN INI SAJA UNTUK MENGGANTI KONTEN
+       ========================================================= */
+
+    const CONFIG = {
+      // Nama pacar yang sedang berulang tahun
+      name: "GINOYY!",
+
+      // Ucapan manis di bagian atas halaman
+      heroText: "HARI INI HARI KAMUUU!! 🥳💗 HAPPY BIRTHDAYYY, SAYANGGG!! makasiii yaa udah lahir ke duniaa, udah jadi kamuu yang lucuu, ngeselinn dikit tapi tetep gemesss, dan udah bikin hari-hariku jadi lebih seruu. semogaaa hari ini kamu seneng terus, ketawaaa yang banyakk, dapet banyak hal baik, makan enakk, dan ngerasa disayanggg bangettt. AKU SAYANG KAMUUU BANYAKK BANGETTT!! ♡",
+
+      // Surat romantis untuk pacar
+      letterText: `HAPPY BIRTHDAYYY, CANTIII KAKAAAA!! 🎂💗🫶🏻
+
+HARI INI TUH HARI KAMUUU, ORANG PALING GEMESS YANG AKU PUNYAAA!! aku pengen bilang makasiii banyaaak karena kamu udah lahir, udah tumbuh jadi kamu yang sekarang, dan entah gimana caranya bisa bikin aku sesayang inii sama kamuuu. kadang kamu nyebelin, kadang bikin aku geleng-geleng sendiri WKWKWK, tapi yaa gimana dongg, ujung-ujungnya tetep kamuuu yang aku cari 😭💗
+
+Semogaaa di umur yang baruu ini kamu makin bahagiaa, sehat terusss, semua urusan kamu dimudahin, rezekinya lancarr, dan satu-satu hal yang kamu pengenin bisa kejadian yaa. semoga kamu ketemu banyaaak alasan buat senyum, ketawa sampe sakit perut, dan punya hari-hari yang bikin kamu mikir, “ihh ternyata hidup bisa seindah inii yaa.” KAMU PANTES BANGET DAPET HAL-HAL BAIKKK!!
+
+Kalau nanti kamu capek, sedih, ngerasa dunia lagi nggak berpihak sama kamu, jangan ngerasa harus kuat sendirian yaa sayanggg. cerita aja ke aku, mau cerita yang panjanggg banget juga gapapaa, mau diem dulu juga gapapaa. aku mungkin nggak selalu punya jawaban yang bener, tapi aku mau dengerin kamu, nemenin kamu, dan belajar jadi tempat pulang yang nyaman buat kamuuu. jangan lupa istirahat, makan yang bener, minum air, sama jangan terlalu keras sama diri sendiri yaa, bocill gemesss satu iniii 🥹🫶🏻💗
+
+SEKALI LAGIII, HAPPY BIRTHDAYYY SAYANGGG!! 🥳🎉 semoga doa-doa yang kamu simpen diem-diem satu per satu jadi nyata yaa. hari ini kamu harus senenggg, harus ngerasa disayanggg, dan harus tau kalo kamu itu berharga bangettt. aku bangga sama kamu, aku bersyukur ada kamu, dan aku sayanggg kamuuu lebih dari yang bisa aku ketik di sini WKWKWK. sini peluk jauhhh duluuu 🫂💗✨`,
+
+      // Tanda tangan di bawah surat
+      signature: "dari kakaaa, yang bakal selalu ada kalo dedeee butuhh ♡💗",
+
+      // Background utama.
+      // Contoh lokal: "assets/images/background.jpg"
+      // Contoh hosting: "https://domain-kamu.com/background.jpg"
+      backgroundImage: "assets/images/background.jpg",
+
+      // Tingkat opacity gambar background (0.0 sampai 1.0)
+      backgroundOpacity: 0.20,
+
+      // Lagu. Bisa path lokal atau URL audio publik/direct link.
+      // Contoh: "assets/music/birthday-song.mp3"
+      musicUrl: "assets/music/birthday-song.mp3",
+      musicTitle: "laguu buat cewek paling gemesss 🎶💗",
+
+      // Daftar foto kenangan kalian. Tambahkan/hapus object sesuai kebutuhan.
+      // image: path lokal atau URL direct image publik.
+      memories: [
+        {
+          image: "https://beeimg.com/images/n75941590063.jpg",
+          caption: "INI LUCUU BANGET PLISSS 🥹💗",
+          date: "MANIS BGT SI AH ♡"
+        },
+        {
+          image: "https://beeimg.com/images/p42270221254.jpg",
+          caption: "UWAAAAA 💗",
+          date: "SENYUMNYA GEMESS BANGETTT ✨"
+        },
+        {
+          image: "https://beeimg.com/images/m67072867032.jpg",
+          caption: "LUTUNAAAAAAAA!!",
+          date: "GEMASHNYOOO AIWUAYEFVKUVEFY ♡"
+        }
+      ],
+
+      // Ornamen bergerak di background
+      decorations: ["♡", "✦", "✿", "✨", "♥", "⋆"],
+      decorationCount: 22
+    };
+
+    /* =========================================================
+       JAVASCRIPT — UMUMNYA TIDAK PERLU DIUBAH
+       ========================================================= */
+    const $ = (id) => document.getElementById(id);
+
+    function initPage() {
+      $("birthdayName").textContent = CONFIG.name;
+      $("heroDescription").textContent = CONFIG.heroText;
+      $("letterText").textContent = CONFIG.letterText;
+      $("letterSignature").textContent = CONFIG.signature;
+
+      // Background image. Jika belum ada gambar, gradient CSS tetap terlihat.
+      const bg = $("backgroundImage");
+      bg.style.opacity = String(CONFIG.backgroundOpacity);
+      if (CONFIG.backgroundImage && !CONFIG.backgroundImage.includes("GANTI_URL")) {
+        bg.style.backgroundImage = `url("${CONFIG.backgroundImage}")`;
+      }
+
+      // Setup musik
+      const audio = $("birthdayAudio");
+      audio.src = CONFIG.musicUrl;
+      $("songTitle").textContent = CONFIG.musicTitle;
+
+      // Galeri foto
+      renderMemories();
+
+      // Animasi ornamen
+      createFloatingDecorations();
+    }
+
+    function renderMemories() {
+      const grid = $("memoryGrid");
+      grid.innerHTML = "";
+
+      CONFIG.memories.forEach((memory, index) => {
+        const card = document.createElement("article");
+        card.className = "memory-card";
+        card.style.setProperty("--tilt", index % 2 === 0 ? "-1.4deg" : "1.4deg");
+
+        const image = document.createElement("img");
+        image.src = memory.image;
+        image.alt = memory.caption || `Kenangan ${index + 1}`;
+        image.loading = index > 2 ? "lazy" : "eager";
+        image.onerror = () => {
+          image.alt = "Foto belum ditemukan. Periksa alamat foto di bagian CONFIG.";
+          image.style.objectFit = "contain";
+          image.style.padding = "18px";
+          image.src = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(
+            `<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500"><rect width="100%" height="100%" fill="#ffe3ed"/><text x="50%" y="46%" text-anchor="middle" font-size="70">📸</text><text x="50%" y="60%" text-anchor="middle" font-family="Arial" font-size="20" fill="#805b75">Check image path</text></svg>`
+          );
+        };
+
+        const caption = document.createElement("div");
+        caption.className = "memory-caption";
+        caption.textContent = memory.caption || `Kenangan #${index + 1}`;
+
+        const date = document.createElement("div");
+        date.className = "memory-date";
+        date.textContent = memory.date || "♡ momen istimewa ♡";
+
+        card.append(image, caption, date);
+        grid.appendChild(card);
+      });
+    }
+
+    function createFloatingDecorations() {
+      const host = $("floating-decorations");
+      for (let i = 0; i < CONFIG.decorationCount; i++) {
+        const item = document.createElement("span");
+        item.className = "floating-item";
+        item.textContent = CONFIG.decorations[Math.floor(Math.random() * CONFIG.decorations.length)];
+        item.style.left = `${Math.random() * 100}%`;
+        item.style.fontSize = `${14 + Math.random() * 22}px`;
+        item.style.animationDuration = `${12 + Math.random() * 15}s`;
+        item.style.animationDelay = `${-Math.random() * 24}s`;
+        host.appendChild(item);
+      }
+    }
+
+    function launchConfetti() {
+      const layer = $("confetti-layer");
+      const colors = ["#ff85ad", "#c5b5ff", "#ffcf70", "#83ddc3", "#ff9b85", "#ffffff"];
+
+      for (let i = 0; i < 130; i++) {
+        const piece = document.createElement("span");
+        piece.className = "confetti-piece";
+        piece.style.left = `${Math.random() * 100}%`;
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDelay = `${Math.random() * 0.7}s`;
+        piece.style.animationDuration = `${2.2 + Math.random() * 1.7}s`;
+        piece.style.setProperty("--drift", `${Math.random() * 260 - 130}px`);
+        piece.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px";
+        layer.appendChild(piece);
+        window.setTimeout(() => piece.remove(), 4500);
+      }
+    }
+
+    // Music controls
+    const audio = $("birthdayAudio");
+    const playButton = $("playButton");
+    const musicDisc = $("musicDisc");
+    const songStatus = $("songStatus");
+
+    async function toggleMusic() {
+      if (!audio.src) {
+        songStatus.textContent = "ISI URL LAGUNYAA DULU YAA DI CONFIG.musicUrl 💗";
+        return;
+      }
+
+      if (audio.paused) {
+        try {
+          await audio.play();
+        } catch (error) {
+          songStatus.textContent = "tunggu sebentar yaa!!";
+        }
+      } else {
+        audio.pause();
+      }
+      updateMusicUI();
+    }
+
+    function updateMusicUI() {
+      const playing = !audio.paused;
+      playButton.textContent = playing ? "⏸ Jeda duluu" : "▶ Puterrr";
+      musicDisc.classList.toggle("is-playing", playing);
+      if (playing) {
+        songStatus.textContent = "LAGUNYAA LAGI MUTERRR BUAT KAMUUU 💗🎶";
+      } else if (audio.currentTime > 0) {
+        songStatus.textContent = "okee lagunyaa istirahat duluu hehe ♡";
+      } else {
+        songStatus.textContent = "PENCET PUTERRR BUAT DENGERIN LAGUNYAA 🎶";
+      }
+    }
+
+    playButton.addEventListener("click", toggleMusic);
+    $("stopButton").addEventListener("click", () => {
+      audio.pause();
+      audio.currentTime = 0;
+      updateMusicUI();
+    });
+    audio.addEventListener("play", updateMusicUI);
+    audio.addEventListener("pause", updateMusicUI);
+    audio.addEventListener("error", () => {
+      songStatus.textContent = "tunggu sebentar yaa!!";
+    });
+
+    $("surpriseButton").addEventListener("click", launchConfetti);
+
+    initPage();
+  </script>
+</body>
+</html>
